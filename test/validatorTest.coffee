@@ -359,40 +359,6 @@ describe 'Validator', () ->
 		expect(result.valid).to.be.false
 		done()
 
-	it 'define new simple validator definition 2', (done) ->
-
-		validator.addType
-			is_car:
-				desc: "check if variable is 'car'."
-				fn: (data, options) ->
-					if data is "car"
-						data: data
-						valid: true
-						message: ''
-					else
-						valid: false
-						message: 'data is not "car"'
-
-		vDefinition =
-			title: is_car: 1
-
-		vData =
-			title: "car"
-
-
-		result = validator.start(vData, vDefinition)
-
-		expect(result.valid).to.be.true
-		expect(result.data.title).to.equal "car"
-
-		vData =
-			title: "truck"
-
-		result = validator.start(vData, vDefinition)
-
-		expect(result.valid).to.be.false
-		done()
-
 	it 'define new complex (object) validator definition', (done) ->
 
 		validator.define 'ADDRESS',
@@ -423,6 +389,40 @@ describe 'Validator', () ->
 				street: 'Jozef Straat'
 				houseNumber: '23'
 				postcode: 2421
+
+		result = validator.start(vData, vDefinition)
+
+		expect(result.valid).to.be.false
+		done()
+		
+	it 'define new simple validator type', (done) ->
+
+		validator.addType
+			is_car:
+				desc: "check if variable is 'car'."
+				fn: (data, options) ->
+					if data is "car"
+						data: data
+						valid: true
+						message: ''
+					else
+						valid: false
+						message: 'data is not "car"'
+
+		vDefinition =
+			title: is_car: 1
+
+		vData =
+			title: "car"
+
+
+		result = validator.start(vData, vDefinition)
+
+		expect(result.valid).to.be.true
+		expect(result.data.title).to.equal "car"
+
+		vData =
+			title: "truck"
 
 		result = validator.start(vData, vDefinition)
 
