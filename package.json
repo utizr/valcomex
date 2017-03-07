@@ -9,7 +9,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "postinstall": "./node_modules/coffee-script/bin/coffee --compile --output dist/ src/",
+    "build": "./node_modules/coffee-script/bin/coffee --compile --output dist/ src/",
     "test": "mocha && istanbul report text-summary lcov",
     "testQuick": "env env=test mocha"
   },
