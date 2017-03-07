@@ -7,9 +7,9 @@
     "Tom Verschueren <tom.verschueren@slickss.com>",
     "Aaron Sievers"
   ],
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "./node_modules/coffee-script/bin/coffee --compile --output lib/ src/",
+    "postinstall": "coffee --compile --output dist/ src/",
     "test": "mocha && istanbul report text-summary lcov",
     "testQuick": "env env=test mocha"
   },
